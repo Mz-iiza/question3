@@ -6,126 +6,125 @@
         <button>Search</button>
         <button>Clear</button>
     </div>
-       <div class="product__card">
-          <!--<div product__item-image>
+    <div class="product__card">
+        <!--<div product__item-image>
                  <img :src={{image}} alt={{title}} />
                </div>-->
-           
-            <li v-for="product in products" :key="product.id" class="product">
-              <h2>{{ product.title }}</h2>
-            
-                <button @click="$router.push(`/products/${product.id}`)">Product Details</button>
-            
-            </li>
-        </div> 
-   
+
+        <li v-for="product in products" :key="product.id" class="product prd">
+            <h2>{{ product.title }}</h2>
+         
+            <button  @click="$router.push(`/products/${product.id}`)"> Details</button>
+         
+        </li>
+    </div>
 </template>
 
 <script>
 import { ref } from "@vue/reactivity"; // import ref from vue
 import { onMounted } from "vue"; // import onMounted from vue
+import { mapGetters } from "vuex";
 
 // exporting the products
 export default {
     name: "Products",
-// setting up the products
-setup() {
-    const products = ref([]); 
+    
+    // setting up the products
+    setup() {
+        const products = ref([]);
 
-    const fetchProducts = () => {      
-        const endpoint = "https://dummyjson.com/products/";
+        const fetchProducts = () => {
+            const endpoint = "https://dummyjson.com/products/";
 
-        fetch(endpoint)
-            .then((response) => response.json())
-            .then((response) => (products.value = response.products ));
+            fetch(endpoint)
+                .then((response) => response.json())
+                .then((response) => (products.value = response.products));
         };
-     // onMounted(fetchproducts);
-     onMounted(() => {
-        fetchProducts();
-     })  
-        
-// returning the products
-    return {
-        products,
-    };
-},
+        // onMounted(fetchproducts);
+        onMounted(() => {
+            fetchProducts();
+        })
+
+        // returning the products
+        return {
+            products,
+        };
+    },
 };
 
 </script>
 
 <style>
-body{
-    background-image: linear-gradient(
-    -225deg,
-    #a6abde 20%,
-    #f8f6f1 45%,
-    #a6abde 70%,
-    #13194e 100%
-  );
-  
+body {
+    background-image: linear-gradient(-225deg,
+            #a6abde 20%,
+            #f8f6f1 45%,
+            #a6abde 70%,
+            #13194e 100%);
+
 }
-/*.product__card{
+
+.product__card {
+    width: 75%;
+    width: 90%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2.5rem;
-    background: #34364e;;
+    margin: 0 auto;
+    color: #565a85;
+}
+
+.product {
+    background: #13194e;
     padding: 1.2rem;
     border-radius: 2rem;
     border: 1px solid transparent;
     transition: all 400ms ease;
-    width: 75%;
-  width: var(--container-width-lg);
-  margin: 0 auto;
-}*/
-.container {
-  width: 75%;
-  margin: 0 auto;
-
-}
-.product__container {
-    width: 40%;
-    padding-bottom: 4rem;
-}
-
-.product {
-    background: #34364e;
-    text-align: center;
-    padding: 2rem;
-    border-radius: 2rem;
-    user-select: none;
-    margin: 1.2rem;
+    color:#565a85;
 }
 
 .product:hover {
     border-color: #13194e;
     background: transparent;
     backdrop-filter: blur(4.5px);
-    cursor:default;
+    cursor: pointer;
+    color: #13194e;
 }
+
 .product__item-image {
     border-radius: 1.5rem;
     overflow: hidden;
+    display: block;
+    width: 100%;
+    object-fit: cover;
 }
-
-.product h3 {
-   margin: 1.2rem 0 2rem;
-}
-
 
 
 /* ==========MEDIA QUERIES (MEDIUM DEVICES) ========== */
-@media screen and (max-width: 1024px){
-    .product__container {
+@media screen and (max-width: 1024px) {
+    .product__card {
         grid-template-columns: 1fr 1fr;
         gap: 1.2rem;
+        width: 86%;
     }
- }
-     
- /* ==========MEDIA QUERIES (SMALL DEVICES) ========== */
- @media screen and (max-width: 600px) {
-    .product__container {
+
+    .body {
+        max-width: 1204px;
+        overflow-x: hidden;
+    }
+}
+
+/* ==========MEDIA QUERIES (SMALL DEVICES) ========== */
+@media screen and (max-width: 600px) {
+    .product__card {
         grid-template-columns: 1fr;
         gap: 1rem;
+        width: 90%;
     }
- }
+
+    .body {
+        max-width: 600px;
+        overflow-x: hidden;
+    }
+}
 </style>

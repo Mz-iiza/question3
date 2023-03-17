@@ -1,10 +1,15 @@
 <template>
     <h1>Products</h1>
     <p class="subtitle">Welcome to our online store!</p>
-    <div>
+    <div class="form">
+        <div class="form-group">
         <input type="text" placeholder="Search" />
+        </div>
+        <div>
         <button>Search</button>
         <button>Clear</button>
+        </div>
+        <br>
     </div>
     <div class="product__card">
         <!--<div product__item-image>
@@ -13,9 +18,9 @@
 
         <li v-for="product in products" :key="product.id" class="product prd">
             <h2>{{ product.title }}</h2>
-         
-            <button  @click="$router.push(`/products/${product.id}`)"> Details</button>
-         
+
+            <button @click="$router.push(`/products/${product.id}`)"> Details</button>
+
         </li>
     </div>
 </template>
@@ -23,13 +28,11 @@
 <script>
 import { ref } from "@vue/reactivity"; // import ref from vue
 import { onMounted } from "vue"; // import onMounted from vue
-import { mapGetters } from "vuex";
-
 // exporting the products
 export default {
     name: "Products",
-    
     // setting up the products
+
     setup() {
         const products = ref([]);
 
@@ -38,20 +41,19 @@ export default {
 
             fetch(endpoint)
                 .then((response) => response.json())
-                .then((response) => (products.value = response.products));
-        };
-        // onMounted(fetchproducts);
-        onMounted(() => {
-            fetchProducts();
-        })
+                .then((response) => (products.value = response.products))
+           };
 
-        // returning the products
-        return {
-            products,
-        };
-    },
-};
-
+          onMounted(() => {
+              fetchProducts();
+           });
+          
+            // returning the products
+           return {
+                products,
+            };
+        },
+    };
 </script>
 
 <style>
@@ -71,16 +73,26 @@ body {
     grid-template-columns: repeat(3, 1fr);
     gap: 2.5rem;
     margin: 0 auto;
-    color: #565a85;
+    justify-content: center;
+    align-content: center;
+}
+.product__card {
+  width: 75%;
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  margin: 0 auto;
+  color: #565a85;
 }
 
 .product {
-    background: #13194e;
-    padding: 1.2rem;
-    border-radius: 2rem;
-    border: 1px solid transparent;
-    transition: all 400ms ease;
-    color:#565a85;
+  background: #13194e;
+  padding: 1.2rem;
+  border-radius: 2rem;
+  border: 1px solid transparent;
+  transition: all 400ms ease;
+  color: #565a85;
 }
 
 .product:hover {

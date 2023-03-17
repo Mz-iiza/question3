@@ -1,8 +1,10 @@
 <template>
-    
-    <div class="signup-form">
+    <!--SIGN UP PAGE-->
+    <div class="form">
     <h1>Finally you decided to join the Elite</h1>
     <h2>Sign Up</h2>
+
+    <!--FORM-->
     <form @submit.prevent="submit">
       <div class="form-group">
         <label for="firstName">First Name</label>
@@ -10,18 +12,23 @@
       </div>
 
       <div class="form-group">
-        <label for="laststName">Last Name</label>
+        <label for="lastName">Last Name</label>
         <input type="text" id="name" v-model="lastName" required>
       </div>
 
       <div class="form-group">
-        <label for="laststName">Userame</label>
-        <input type="text" id="name" v-model="lastName" required>
+        <label for="userName">UserName</label>
+        <input type="text" id="name" v-model="userName" required>
       </div>
 
       <div class="form-group">
         <label for="password">Password</label>
         <input type="password" id="password" v-model="password" required>
+      </div>
+
+      <div class="form-group">
+        <label for="confirm-password">Password</label>
+        <input type="confirm-password" id="password" v-model="password" required>
       </div>
       <button type="submit">Sign Up</button>
     </form>
@@ -29,49 +36,39 @@
 
 </template>
 
-<!--<script>
-import { ref } from "@vue/reactivity";
-import { useRouter } from "vue-router";
-export default {
-  setup() {
-    const firstName = ref("");
-    const lastName = ref("");
-    const userName = ref("");
-    const password = ref("");
-    const router = useRouter();
+<script>
+import { mapActions } from "vuex"; // import mapActions from vuex
 
-    const dummyData = {
-      firstName: "uju",
-      lastName: "oyiza",
-      userName: "jujudev",
-      password: "password",
-    };
-
-    const submit = () => {
-      if (
-        firstName.value === dummyData.firstName &&
-        lastName.value === dummyData.lastName &&
-        userName.value === dummyData.userName &&
-        password.value === dummyData.password
-      ) {
-        localStorage.setItem("token", "cacacacacac");
-        alert("Login successful!!!");
-        router.push({ name: "Products" });
-      } else {
-        alert("Username or Password is incorrect!!!");
-      }
-    };
-
+export default { 
+  data() {   // data() is a function that returns an object
     return {
-      firstName,
-      lastName,
-      userName,
-      password,
-      submit,
+      firstName: "",
+      lastName: "",
+      userName: "",
+      password: "",
+      confirmPassword: "",
     };
   },
+  methods: {  // methods is an object that contains functions
+    ...mapActions(["registerUser"]),
+    async signup() {
+      await this.registerUser({
+        firstName: this.firstName,
+        lastName: this.lastName,
+        userName: this.userName,
+        password: this.password,
+      });
+      this.$router.push("/products"); // redirect to products page
+    },
+  },
+  computed: {  // computed is an object that contains functions
+    isValid() {
+      return this.password === this.confirmPassword;  // return true if password and confirmPassword are equal
+    },
+  },
 };
-</script>-->
+</script>
+
 
 
 <style scoped>
@@ -100,7 +97,7 @@ input[type="password"] {
 }
 button[type="submit"] {
   display: block;
-  width: 100%;
+  width: 50%;
   padding: 10px;
   font-size: 16px;
   border-radius: 5px;

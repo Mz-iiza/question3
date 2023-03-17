@@ -1,61 +1,46 @@
 <template>
-    
+    <!--LOGIN PAGE-->
     <div class="form">
-    <h1>Login if you already have an account, if you don't what you waiting for</h1>
-    <h2>Login Page</h2>
+    <h1>Login Page</h1>
+    <h2>Login if you already have an account, if you don't, what you waiting for</h2>
+    
     <form @handleLogin.prevent="handleLogin">
 
-      <div class="form-group">
-        <label for="userName">Username</label>
+      <!--FORM-->
+      <div class="form-group">   
         <input type="text" placeholder="Username" id="userName" v-model="userName" required/>
       </div>
 
       <div class="form-group">
-        
+       <br> 
         <input type="password" placeholder="Password" id="password" v-model="password" required />
       </div>
-      <br/>
+
       <button type="button" @click="handleLogin" :disabled="!userName || !password">Login</button>
     </form>
   </div>
 
 </template>
 
-<!--<script>
-import { ref } from "@vue/reactivity";
-import { useRouter } from "vue-router";
+<script>
+import { mapActions } from "vuex";
+
 export default {
-  setup() {
-    const userName = ref("");
-    const password = ref("");
-    const router = useRouter();
-
-    const dummyData = {
-      userName: "jujudev",
-      password: "password",
-    };
-
-    const handleLogin = () => {
-      if (
-        userName.value === dummyData.userName &&
-        password.value === dummyData.password
-      ) {
-        localStorage.setItem("token", "cacacacacac");
-        alert("Login successful!!!");
-        router.push({ name: "Products" });
-      } else {
-        alert("Username or Password is incorrect!!!");
-      }
-    };
-
+  data() {
     return {
-      userName,
-      password,
-      handleLogin,
+      userName: "",
+      password: "",
     };
   },
+  methods: {
+    ...mapActions(["loginUser"]),
+    async handleLogin() {
+      await this.loginUser({ userName: this.userName, password: this.password });
+      this.$router.push("/products");
+    },
+  },
 };
-</script>-->
+</script>
 
 
 

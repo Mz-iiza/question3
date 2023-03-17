@@ -7,6 +7,8 @@ import Product from "@/pages/Product.vue"; // importing Product from "../pages/P
 import Products from "@/pages/Products.vue"; // importing products from "../pages/products.vue"//
 import Login from "@/pages/Login.vue"; // importing login from "../pages/Login.vue"//
 import Signup from "@/pages/Signup.vue"; // importing Signup from "../pages/Signup.vue"//
+import store from "@/store/index.js"; // importing store from "../store/index.js"//
+import Error404 from "@/pages/Error404.vue"; // importing Error404 from "../pages/Error404.vue"//
 
 //creating a constant called routes and assigning it to an array of objects//
 
@@ -20,6 +22,7 @@ const routes = [
     name: "Products",
     path: "/products",
     component: Products,
+    meta: { requiresAuth: true },
   },
   {
     name: "Product",
@@ -31,11 +34,18 @@ const routes = [
     name: "Login",
     path: "/login",
     component: Login,
+    meta: { requiresGuest: true },
   },
   {
     name: "signup",
     path: "/signup",
     component: Signup,
+    meta: { requiresGuest: true },
+  },
+  {
+    name: "Error404",
+    path: "/:pathMatch(.*)*",
+    component: Error404,
   },
 ];
 
@@ -46,26 +56,17 @@ const router = createRouter({
   routes, // passing the routes constant//
 });
 
-/*const isAuthenticated = false; // creating a constant called isAuthenticated and assigning it to false//
+//creating a function called canUserAccess//
 
-const canUserAccess = (to) => {
-   if (!isAuthentificated && to.name !== "Login"){
-    return false;
-   } 
-
-   return true;
-}
-
-router.beforeEach(async (to, from) => {
-   const canAccess = await canUserAccess(to)
-
-  if (!canAccess) {
-    return{
-      name: "Login"
-    };
+router.beforeEach(async (to,from, next) => {
+  if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
+    next("/login");
+  } else if (to.meta.requiresGuest && store.getters.isAuthenticated) {
+    next("/products");
+  } else {
+    next();
   }
-});*/
-
+});
 
 
 export default router;

@@ -1,17 +1,29 @@
 <template>
   <div>
-    <h1>Welcome to the HomePage</h1>
+    <h1>Welcome to HOME PAGE</h1>
   </div>
 
-  <div>
-   <h1> blog</h1> 
-  </div>
+
 </template>
 
 <script>
-//import Login from "../pages/Login.vue";//
-//import signup from "../pages/Signup.vue";//
 
 export default {};
 </script>
-<style></style>
+
+<style>
+*{  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+
+.container {
+  width: 75%;
+  width: 90%;
+  margin: 0 auto;
+}
+</style>

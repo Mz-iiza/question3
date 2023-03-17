@@ -7,12 +7,23 @@
 
 <script>
 import Navbar from "@/components/Navbar.vue"
+import { mapGetters } from "vuex";
 
 export default {
   name: 'App',
   components: {
     Navbar,
-  }
+  },
+  computed: {
+    ...mapGetters(["isAuthenticated"]),
+  },
+  watch: {
+    isLoggedIn(newValue) {
+      if (!newValue) {
+        this.$router.push({ name: "Login" });
+      }
+    },
+  },
 }
 </script>
 

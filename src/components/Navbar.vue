@@ -6,10 +6,10 @@
     </div>
   
       <div class="nav-list">
-         <router-link to="/">Home</router-link>
-         <router-link to="/login" >Login</router-link>
-         <router-link to="/signup" >Sign Up</router-link>
-         <router-link to="/products">Products</router-link>
+        <h4><router-link to="/">Home</router-link></h4> 
+        <h4><router-link to="/login" >Login</router-link></h4>
+         <h4><router-link to="/signup" >Sign Up</router-link></h4>
+         <h4><router-link to="/products">Products</router-link></h4>
        </div>
     
     <div class="logout-btn">
@@ -18,28 +18,21 @@
   </div> 
     
     
-  </template>
+</template>
 
  
-  
-  <!--<script>
-  import { computed } from "@vue/reactivity";
-  import { useRouter } from "vue-router";
-  export default {
-    setup() {
-      const router = useRouter();
-      const handleLogout = () => {
-        localStorage.removeItem("token");
-        router.push("/login");
-      };
-      const isAuthenticated = computed(() => !!localStorage.getItem("token"));
-      return {
-        isAuthenticated,
-        handleLogout,
-      };
-  },*/
-  };
-  </script> -->
+<script>
+import { mapGetters, mapActions } from "vuex";
+
+export default {
+  computed: {
+    ...mapGetters(["isAuthenticated"]),
+  },
+  methods: {
+    ...mapActions(["logout"]),
+  },
+};
+</script>
   
   <style>
   *{
@@ -82,7 +75,10 @@
     padding: 0 2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
-
+  .router-link{
+    color: #13194e;
+    font-size: 2rem;
+  }
   .navbar a {
     font-size: 2rem;
     font-weight: 700;
@@ -108,6 +104,7 @@
     align-items: center;
     list-style: none;
     gap: 2rem;
+    color: #13194e;
   }
   @media screen and (max-width: 600px) {
   .navbar {

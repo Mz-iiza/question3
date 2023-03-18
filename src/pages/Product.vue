@@ -1,9 +1,13 @@
 <template>
     <div class="prd product">
     <h2>Product Details</h2>
-    <h1>{{ product.title }}</h1>
-    <h3>{{ product.description }}</h3>
-    <h2> ${{ product.price }}</h2>
+    <h3>{{ product.title }}</h3>
+    <img class="img" :src="product.thumbnail" alt="" />
+    <br>
+    <h5>{{ product.description }}</h5>
+    <br>
+    <h3>Product price: ${{ product.price }}</h3>
+    <h3>Discounted price: ${{ product.discountPercentage }}</h3>
     <br>
     <div>
         <button class="button"> Add to Cart</button>
@@ -51,38 +55,43 @@ export default {
 
 </script>
 
-<style>
+<style >
 
-h1{
-    color: #565a85;
-    font-size: 2rem;
+
+h1,
+h2,
+h3,
+h4,
+h5{
+    color:#201f1fcf;
     font-weight: 700;
     text-align: center;
-    margin: 1rem 0;
+    margin: 0 auto;
 }
 
-h2{
-    color: #565a85;
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-align: center;
-    margin: 1rem 0;
-}
-
-h3{
-    color:#565a85;
-    font-size: 1.2rem;
-    font-weight: 700;
-    text-align: center;
-    margin: 1rem 0;
+img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  background: #fff;
+  padding: 0.1rem;
+  border-radius: 2rem;
+  border: 1px solid transparent;
+  width: 25%;
+  height: 25;
 }
 
 p{
-    color:#565a85;
+    color:#201f1fcf;
     font-size: 1rem;
     font-weight: 700;
     text-align: center;
-    margin: 1rem 0;
+    margin: 0 auto;
 }
 
 div{
@@ -106,7 +115,7 @@ div{
 }
 
 button {
-  background-color: #13194e;
+  background-color: #66023c;
   color: #fff;
   border: none;
   padding: 12px 24px;
@@ -120,9 +129,9 @@ button {
 }
 
 button:hover {
-  color: #13194e;
-  background-color:#565a85;
-  box-shadow: 0px 8px 20px rgb(1, 11, 63);
+  color: #66023c;
+  background-color: #fff;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0,1);
 }
 
 </style>

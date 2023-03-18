@@ -1,8 +1,9 @@
 <template>
     <!--SIGN UP PAGE-->
     <div class="form">
-    <h1>Finally you decided to join the Elite</h1>
-    <h2>Sign Up</h2>
+    <h1>Sign Up</h1>
+    <p> Enjoy personalized shopping experiences</p>
+    <h2>We're thrilled you're here. Sign up and enjoy the perks of being a part of our online community</h2>
 
     <!--FORM-->
     <form @submit.prevent="submit">

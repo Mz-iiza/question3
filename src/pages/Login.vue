@@ -2,7 +2,8 @@
     <!--LOGIN PAGE-->
     <div class="form">
     <h1>Login Page</h1>
-    <h2>Login if you already have an account, if you don't, what you waiting for</h2>
+   <p>Welcome back, savvy shopper. We've missed you!</p> 
+    <h2>Log in to your account and unlock member-only benefits, including discounts and promotions</h2>
     
     <form @handleLogin.prevent="handleLogin">
 

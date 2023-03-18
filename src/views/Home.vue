@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Welcome to HOME PAGE</h1>
+    <p>Indulge in a little retail therapy from the comfort of your home. Welcome to our online store.</p>
   </div>
 
 

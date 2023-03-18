@@ -1,37 +1,43 @@
 <template>
     <h1>Products</h1>
-    <p class="subtitle">Welcome to our online store!</p>
+    <p class="subtitle">Discover what makes our products stand out from the rest!</p>
+    <h2> Welcome to our product page</h2>
     <div class="form">
         <div class="form-group">
-        <input type="text" placeholder="Search" />
+            <input type="text" placeholder="Search" />
         </div>
         <div>
-        <button>Search</button>
-        <button>Clear</button>
+            <button>Search</button>
+            <button>Clear</button>
         </div>
-        <br>
+        <br />
     </div>
     <div class="product__card">
-        <!--<div product__item-image>
-                 <img :src={{image}} alt={{title}} />
-               </div>-->
-
         <li v-for="product in products" :key="product.id" class="product prd">
+            <img :src="product.thumbnail" alt="" />
             <h2>{{ product.title }}</h2>
 
-            <button @click="$router.push(`/products/${product.id}`)"> Details</button>
-
+            <button @click="$router.push(`/products/${product.id}`)">Details</button>
         </li>
     </div>
 </template>
-
+  
 <script>
 import { ref } from "@vue/reactivity"; // import ref from vue
 import { onMounted } from "vue"; // import onMounted from vue
+import { mapGetters } from "vuex";
 // exporting the products
 export default {
     name: "Products",
     // setting up the products
+    computed: {
+        ...mapGetters(["isAuthenticated"]),
+    },
+    mounted() {
+        if (!this.isAuthenticated) {
+            this.$router.push({ name: "Login" });
+        }
+    },
 
     setup() {
         const products = ref([]);
@@ -41,29 +47,24 @@ export default {
 
             fetch(endpoint)
                 .then((response) => response.json())
-                .then((response) => (products.value = response.products))
-           };
+                .then((response) => (products.value = response.products));
+        };
 
-          onMounted(() => {
-              fetchProducts();
-           });
-          
-            // returning the products
-           return {
-                products,
-            };
-        },
-    };
+        onMounted(() => {
+            fetchProducts();
+        });
+
+        // returning the products
+        return {
+            products,
+        };
+    },
+};
 </script>
-
+  
 <style>
 body {
-    background-image: linear-gradient(-225deg,
-            #a6abde 20%,
-            #f8f6f1 45%,
-            #a6abde 70%,
-            #13194e 100%);
-
+    background:#fff;
 }
 
 .product__card {
@@ -76,41 +77,44 @@ body {
     justify-content: center;
     align-content: center;
 }
+
 .product__card {
-  width: 75%;
-  width: 90%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2.5rem;
-  margin: 0 auto;
-  color: #565a85;
+    width: 75%;
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    margin: 0 auto;
+    color: #201f1fcf;
 }
 
 .product {
-  background: #13194e;
-  padding: 1.2rem;
-  border-radius: 2rem;
-  border: 1px solid transparent;
-  transition: all 400ms ease;
-  color: #565a85;
+    background: #fff;
+    padding: 1.2rem;
+    border-radius: 2rem;
+    border: 1px solid transparent;
+    transition: all 400ms ease;
+    color: #201f1fcf;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0,1);
 }
-
-.product:hover {
-    border-color: #13194e;
-    background: transparent;
-    backdrop-filter: blur(4.5px);
-    cursor: pointer;
-    color: #13194e;
+h1,
+h2,
+h3,
+h4,
+h5,
+p{
+    color:#201f1fcf;
 }
 
 .product__item-image {
     border-radius: 1.5rem;
     overflow: hidden;
     display: block;
-    width: 100%;
+    width: 10%;
+    height: 10%;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0,1);
     object-fit: cover;
 }
-
 
 /* ==========MEDIA QUERIES (MEDIUM DEVICES) ========== */
 @media screen and (max-width: 1024px) {

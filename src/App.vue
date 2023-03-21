@@ -9,7 +9,9 @@
 import Navbar from "@/components/Navbar.vue"
 import { mapGetters } from "vuex";
 
+
 export default {
+  
   name: 'App',
   components: {
     Navbar,
@@ -34,6 +36,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #201f1fcf;
-  margin-top: 0px;
 }
 </style>

@@ -1,30 +1,41 @@
 <template>
   <div class="navbar">
-    <div class="store">
-      <a href="#" class="logo">STORE</a>
+    <div class="logo">
+      <h1>STORE</h1>
     </div>
 
-    <div class="nav-list">
-      <h4><router-link to="/">Home</router-link></h4>
+    <div class="nav__list">
+      <h4><router-link to="/" class="links">Home</router-link></h4>
       <h4 v-if="!isAuthenticated">
-        <router-link to="/login">Login</router-link>
+        <router-link to="/login" class="links">Login</router-link>
       </h4>
-      <h4 v-if="!isAuthenticated">
-        <router-link to="/signup">Sign Up</router-link>
-      </h4>
-      <h4><router-link to="/products">Products</router-link></h4>
+      
+      <h4><router-link to="/products" class="links">Products</router-link></h4>
     </div>
+
 
     <div class="logout-btn">
       <button v-if="isAuthenticated" @click="logout">Logout</button>
     </div>
+
+    <div class="hamburger__container">
+      <Hamburger />
+    </div>
+
+   
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import Hamburger from "@/components/Hamburger.vue";
 
 export default {
+  name: "Navbar",
+  components: {
+    Hamburger,
+  },
+ 
   computed: {
     ...mapGetters(["isAuthenticated"]),
   },
@@ -34,15 +45,19 @@ export default {
 };
 </script>
 
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+<style >
+
+.navbar {
+  height: 15vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.logo {
+.logo h1 {
   font-family: "Poppins", sans-serif cursive;
   font-size: 3rem;
   margin: 20px 0 15px -5px;
@@ -63,17 +78,21 @@ export default {
   animation: textclip 2s linear infinite;
   display: inline-block;
 }
-
-.navbar {
-  margin: 0px;
-  height: 20vh;
+.nav__list  {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   align-items: center;
-  padding: 0 2rem;
-  background-color: #000;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  justify-content: center;
+  gap: 6rem;
+}
+
+
+
+.hamburger__container {
+  margin-right: 4rem;
+}
+
+.nav__list .links{
+  margin: 0 1rem;
 }
 
 .router-link {
@@ -82,7 +101,7 @@ export default {
 }
 
 .navbar a {
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #fff;
   text-decoration: none;
@@ -111,7 +130,8 @@ export default {
   color: #13194e;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
+
   .navbar {
     display: flex;
     flex-wrap: wrap;
@@ -122,6 +142,7 @@ export default {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
+
   .navbar a {
     font-size: 1.5rem;
     font-weight: 700;
@@ -129,24 +150,17 @@ export default {
     text-decoration: none;
   }
 
-  .nav-list {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    gap: 25px;
+  .nav__list {
+    display: none;
   }
 
-  .navbar-list {
-    flex-direction: column;
-  }
-
-  .navbar-list li {
-    display: block;
-    margin: 10px 0;
-  }
-
-  .navbar-list li a {
-    padding: 5px;
-    font-size: 14px;
+  .logout-btn button {
+   background: #000 !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 5px !important;
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
   }
 }</style>

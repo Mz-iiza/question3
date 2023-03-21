@@ -10,7 +10,7 @@
     <h3>Discounted price: ${{ product.discountPercentage }}</h3>
     <br>
     <div>
-        <button class="button"> Add to Cart</button>
+        <button class="product-btn"> Add to Cart</button>
   </div>
 </div>
 </template>
@@ -99,24 +99,9 @@ div{
     margin: 1rem 0;
 }
 
-.prd {
-    width: 75%;
-    width: 90%;
-    padding: 1.2rem;
-    display: grid;
-    border: 1px solid #13194e;
-    border-radius: 2rem;
-    background: transparent;
-    backdrop-filter: blur(4.5px);
-    cursor: pointer;
-    color: #13194e;
-    margin: 0 auto;
-    transition: all 400ms ease;
-}
-
-button {
+.product-btn {
   background-color: #66023c;
-  color: #fff;
+  color: #d961a7;
   border: none;
   padding: 12px 24px;
   font-size: 16px;
@@ -130,8 +115,9 @@ button {
 
 button:hover {
   color: #66023c;
-  background-color: #fff;
+  background-color: #d961a7;
   box-shadow: 0px 8px 20px rgba(0, 0, 0,1);
 }
+
 
 </style>

@@ -56,7 +56,7 @@ export default {
 .login__container {
   margin: 3rem;
   padding: 1rem;
-  background-color: #fff;
+  background-color:  #f2f2f2;;
 }
 .signup__btn{
   margin-top: 1rem;

@@ -1,3 +1,4 @@
+<!-- PRODUCT PAGE -->
 <template>
     <h1>Products</h1>
     <p class="subtitle">Discover what makes our products stand out from the rest!</p>
@@ -6,9 +7,9 @@
         <div class="form-group">
             <input type="text" placeholder="Search" />
         </div>
-        <div>
+        <div class="products__btn">
             <button>Search</button>
-            <button>Clear</button>
+            <button @click="clearSearch">Clear</button>
         </div>
         <br />
     </div>
@@ -16,7 +17,7 @@
         <li v-for="product in products" :key="product.id" class="product prd">
             <img :src="product.thumbnail" alt="" />
             <h2>{{ product.title }}</h2>
-
+              <br/>
             <button @click="$router.push(`/products/${product.id}`)">Details</button>
         </li>
     </div>
@@ -50,6 +51,10 @@ export default {
                 .then((response) => (products.value = response.products));
         };
 
+        const clearSearch = () => {
+      fetchProducts();
+    };
+
         onMounted(() => {
             fetchProducts();
         });
@@ -57,6 +62,7 @@ export default {
         // returning the products
         return {
             products,
+            clearSearch,
         };
     },
 };
@@ -107,13 +113,40 @@ p{
 }
 
 .product__item-image {
-    border-radius: 1.5rem;
+    border-radius: 0.5rem;
     overflow: hidden;
     display: block;
-    width: 10%;
-    height: 10%;
+    width: 50px;
+    height: 50px;
     box-shadow: 0px 8px 20px rgba(0, 0, 0,1);
     object-fit: cover;
+}
+
+.products__btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+button {
+  background-color: #66023c;
+  color: #d961a7;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0px 4px 10px  rgba(0,0,0,0.5);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+button:hover {
+  color: #66023c;
+  background-color: #d961a7;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0,1);
 }
 
 /* ==========MEDIA QUERIES (MEDIUM DEVICES) ========== */

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home__container">
     <h1>Welcome to HOME PAGE</h1>
     <p>Indulge in a little retail therapy from the comfort of your home. Welcome to our online store.</p>
   </div>
@@ -13,18 +13,28 @@ export default {};
 </script>
 
 <style>
-*{  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  box-sizing: border-box;
-  list-style: none;
-  text-decoration: none;
+.home__container {
+  margin: 0 3rem;
+  padding: 0 1rem;
 }
+.home__container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+.home__container h1 {
+  margin: 2rem;
+} 
+.home__container h2 {
+  margin: 1rem;
+} 
 
-.container {
-  width: 75%;
-  width: 90%;
-  margin: 0 auto;
-}
+.home__container p {
+  margin: 1rem;
+} 
+
 </style>

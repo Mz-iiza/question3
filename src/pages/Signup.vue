@@ -7,7 +7,7 @@
     <p>We're thrilled you're here. Sign up and enjoy the perks of being a part of our online community</p>
 
     <!--FORM-->
-    <form @submit.prevent="submit">
+    <form @submit.prevent="signup">
       <div class="form-group">
         <label for="firstName">First Name</label>
         <input type="text" id="name" v-model="firstName" required>
@@ -41,7 +41,6 @@
 
 <script>
 import { mapActions } from "vuex"; // import mapActions from vuex
-
 export default { 
   data() {   // data() is a function that returns an object
     return {
@@ -64,12 +63,15 @@ export default {
       this.$router.push("/products"); // redirect to products page
     },
   },
+  
   computed: {  // computed is an object that contains functions
     isValid() {
       return this.password === this.confirmPassword;  // return true if password and confirmPassword are equal
     },
   },
+  
 };
+
 </script>
 
 
